@@ -17,7 +17,12 @@ def simple_logic(arr):
 
 
 def no_division(arr):
-    pass
+    new_arr = np.ones(len(arr))
+    indices = np.arange(len(arr))
+    for i, element in enumerate(arr):
+        new_arr[i] = np.prod(arr[np.where(indices != i)])
+
+    return new_arr
 
 
 if __name__ == '__main__':
