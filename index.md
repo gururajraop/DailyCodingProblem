@@ -8,3 +8,4 @@
 
 
 ## Hard Problems
+* [Day 2: Array Product except index](./Hard/Day2_ArrayProd_index.py)
