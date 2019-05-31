@@ -10,7 +10,10 @@ import numpy as np
 
 
 def simple_logic(arr):
-    pass
+    total_prod = np.prod(arr)
+    new_arr = [total_prod / element for element in arr]
+
+    return new_arr
 
 
 def no_division(arr):
