@@ -13,11 +13,30 @@ def simple_logic(a, k):
                 result[key] = (a[i], a[j])
                 key += 1
 
+            if a[j] >= k:
+                break
+        if a[i] >= k:
+            break
+
     return result
 
 
 def single_pass(a, k):
-    pass
+    result = {}
+    a = np.unique(a)
+    key = 0
+    sum = a[a < k]
+    for i in range(len(sum)):
+        new_sum = sum[i] + sum[i+1:]
+        if any(new_sum == k):
+            indices = np.where(new_sum == k)[0]
+            result[key] = (sum[i], sum[indices+i+1][0])
+            key += 1
+
+        if sum[i] >= k:
+            break
+
+    return result
 
 
 if __name__ == '__main__':
@@ -26,6 +45,7 @@ if __name__ == '__main__':
     in_list = np.asarray(in_list, dtype=np.int)
     k = int(input("Enter the value of k:\t"))
 
+    print("--------------------------Simple Logic--------------------------")
     result = simple_logic(in_list, k)
     if len(result) > 0:
         print("The list contains elements adding up to {}".format(k))
@@ -33,5 +53,10 @@ if __name__ == '__main__':
     else:
         print("The list doesn't contain elements adding up to {}".format(k))
 
-    #result = single_pass(in_list, k)
-    #print(result)
+    print("--------------------------Single Pass--------------------------")
+    result = single_pass(in_list, k)
+    if len(result) > 0:
+        print("The list contains elements adding up to {}".format(k))
+        print(result.values())
+    else:
+        print("The list doesn't contain elements adding up to {}".format(k))
