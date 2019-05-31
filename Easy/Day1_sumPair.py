@@ -39,9 +39,6 @@ def single_pass(a, k):
             result[key] = (sum[i], sum[indices+i+1][0])
             key += 1
 
-        if sum[i] >= k:
-            break
-
     return result
 
 
