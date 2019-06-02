@@ -12,12 +12,31 @@ import sys
 import numpy as np
 
 
+class Node():
+    def __init__(self, value, both=0):
+        self.value = value
+        self.both = both
+
+
 class XOR_LinkedList():
     def __init__(self):
+        self.head = None
+        self.tail = None
         self.size = 0
 
     def add_item(self):
-        pass
+        item = int(input("Please enter the item to be added to the list: "))
+        node = Node(value=item)
+        if self.head is None:
+            assert (self.size == 0) and (self.tail is None), "Error!! Something wrong with the list"
+            self.head = self.tail = node
+            self.size += 1
+        else:
+            self.tail.both = id(node) ^ self.tail.both
+            node.both = id(self.tail)
+            self.tail = node
+
+        print("Item {} added successfully to the list at position {}".format(item, self.size))
 
     def remove_item(self):
         pass
@@ -64,7 +83,7 @@ if __name__ == '__main__':
     option = 1
 
     while option != 0:
-        option = int(input())
+        option = int(input("----->Please enter your option: "))
         func = switch(link_list, option)
         if func == -1:
             break
