@@ -18,7 +18,8 @@ import random
 
 
 # Given Python Closure
-# More on python closures: https://www.programiz.com/python-programming/closure
+# More on python closures: https://en.wikipedia.org/wiki/Closure_(computer_programming)
+# and https://www.programiz.com/python-programming/closure
 # and https://www.learnpython.org/en/Closures
 def cons(a, b):
     def pair(f):
@@ -29,12 +30,14 @@ def cons(a, b):
 
 # Return the first element of the pair
 def car(pair):
-    return pair.__closure__[0].cell_contents
+    # return pair.__closure__[0].cell_contents   # Not very best solution
+    return pair(lambda a, b: a)
 
 
 # Return the last element of the pair
 def cdr(pair):
-    return pair.__closure__[1].cell_contents
+    # return pair.__closure__[1].cell_contents    # Not very best solution
+    return pair(lambda a, b: b)
 
 
 if __name__ == '__main__':
