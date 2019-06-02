@@ -5,6 +5,7 @@
 
 ## Medium Problems
 * [Day 3: Tree (De)Serialization](./Medium/Day3_Tree_De_Serialize.py)
+* [Day 5: Pair - First and Last item](./Medium/Day5_Pairs_firstNlast.py)
 
 ## Hard Problems
 * [Day 2: Array Product except index](./Hard/Day2_ArrayProd_index.py)
