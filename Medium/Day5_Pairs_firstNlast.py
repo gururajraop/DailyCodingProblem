@@ -18,6 +18,8 @@ import random
 
 
 # Given Python Closure
+# More on python closures: https://www.programiz.com/python-programming/closure
+# and https://www.learnpython.org/en/Closures
 def cons(a, b):
     def pair(f):
         return f(a, b)
