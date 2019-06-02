@@ -13,7 +13,22 @@ import numpy as np
 
 
 def find_missing_number(arr):
-    pass
+    # Use the index itself to check the number exists or not
+    # First sort the array with one pass O(N) keeping all non-postive integers ar the end
+    arr_size = len(arr)
+    for i in range(arr_size):
+        while 0 < arr[i] < arr_size:
+            val = arr[i]
+            arr[i], arr[val - 1] = arr[val - 1], arr[i]
+            if arr[i] == arr[val - 1]:
+                break
+
+    # Iterate the array and return the first index that breaks the continuity
+    for i, item in enumerate(arr):
+        if item != i + 1:
+            return i + 1
+
+    return arr_size + 1
 
 
 if __name__ == '__main__':
