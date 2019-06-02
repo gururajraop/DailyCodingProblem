@@ -12,37 +12,8 @@ import sys
 import numpy as np
 
 
-def get_positive_subarray(arr):
-    """Get the subarray with positive elements only"""
-    sub_array = []
-    for item in arr:
-        if item > 0:
-            sub_array.append(item)
-
-    return np.array(sub_array)
-
-
 def find_missing_number(arr):
-    pos_arr = get_positive_subarray(arr)
-    arr_size = len(pos_arr)
-
-    # Set all the numbers in the linear space to negative constant space
-    # if the index falls in the linear positive constance space
-    for num in pos_arr:
-        index = abs(num) - 1
-        # Change the number to negative space iff
-        # 1: The index should be valid ie between 0 and size of positive array
-        # 2: The number at position shouldn't be changed already due to duplicate elements
-        if (index >= 0) and (index < arr_size) and pos_arr[index] > 0:
-            pos_arr[index] *= -1
-
-    # return the first item in the positive list that didn't change to negative space
-    for i in range(arr_size):
-        if pos_arr[i] > 0:
-            return i+1
-
-    # return the number next in the linear space
-    return arr_size + 1
+    pass
 
 
 if __name__ == '__main__':
