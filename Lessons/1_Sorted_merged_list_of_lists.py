@@ -1,5 +1,8 @@
 """
 return a new sorted merged list from K sorted lists, each with size N
+
+Note: This is the solution given by Daily Coding Problems. (https://www.dailycodingproblem.com/)
+      It is neither my solution nor I own this solution
 """
 
 import os
