@@ -17,6 +17,7 @@ import numpy as np
 import random
 
 
+# Given Python Closure
 def cons(a, b):
     def pair(f):
         return f(a, b)
@@ -26,17 +27,18 @@ def cons(a, b):
 
 # Return the first element of the pair
 def car(pair):
-    pass
+    return pair.__closure__[0].cell_contents
 
 
 # Return the last element of the pair
-def car(pair):
-    pass
+def cdr(pair):
+    return pair.__closure__[1].cell_contents
 
 
 if __name__ == '__main__':
     a = random.randrange(10)
     b = random.randrange(10)
-    assert car(cons(a, b)) == b, "Failure: Test 1 (first element extraction) failed"
+    print("Given pair of integers are ({}, {})".format(a, b))
+    assert car(cons(a, b)) == a, "Failure: Test 1 (first element extraction) failed"
     assert cdr(cons(a, b)) == b, "Failure: Test 2 (last element extraction) failed"
     print("PASS")
