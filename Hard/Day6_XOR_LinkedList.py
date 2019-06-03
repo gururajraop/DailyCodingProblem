@@ -48,7 +48,8 @@ class XOR_LinkedList(object):
         print("Item {} added successfully to the list at position {}".format(item, self.size))
 
     def remove_item(self):
-        pass
+        print("\tIt is not possible to delete a node from the XOR linked list by only knowing the index or address.")
+        print("\tFor more information check: https://en.wikipedia.org/wiki/XOR_linked_list#Drawbacks")
 
     def get_item(self):
         index = int(input("Please enter the position of the item: "))
@@ -57,7 +58,7 @@ class XOR_LinkedList(object):
         else:
             current = self.head
             prev_id = 0
-            for _ in range(index):
+            for _ in range(index-1):
                 next_id = prev_id ^ current.both
                 prev_id = id(current)
                 current = self._get_obj(next_id)
