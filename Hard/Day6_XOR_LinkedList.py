@@ -10,19 +10,24 @@ dereference_pointer functions that converts between nodes and memory addresses.
 import os
 import sys
 import numpy as np
+import ctypes
 
 
-class Node():
+# Each node of the linked list having a value and XOR pointer of next & prev nodes
+class Node(object):
     def __init__(self, value, both=0):
         self.value = value
         self.both = both
 
 
-class XOR_LinkedList():
+class XOR_LinkedList(object):
     def __init__(self):
         self.head = None
         self.tail = None
         self.size = 0
+
+        # This is to prevent garbage collection (Code adapted from Daily Coding Problem)
+        self.__nodes = []
 
     def add_item(self):
         item = int(input("Please enter the item to be added to the list: "))
@@ -30,11 +35,15 @@ class XOR_LinkedList():
         if self.head is None:
             assert (self.size == 0) and (self.tail is None), "Error!! Something wrong with the list"
             self.head = self.tail = node
-            self.size += 1
         else:
             self.tail.both = id(node) ^ self.tail.both
             node.both = id(self.tail)
             self.tail = node
+        self.size += 1
+
+        # Without this line, Python thinks there is no way to reach nodes between head and tail.
+        # (Code adapted from Daily Coding Problem)
+        self.__nodes.append(node)
 
         print("Item {} added successfully to the list at position {}".format(item, self.size))
 
@@ -42,10 +51,37 @@ class XOR_LinkedList():
         pass
 
     def get_item(self):
-        pass
+        index = int(input("Please enter the position of the item: "))
+        if not(0 < index <= self.size):
+            print("Error!! Invalid index")
+        else:
+            current = self.head
+            prev_id = 0
+            for _ in range(index):
+                next_id = prev_id ^ current.both
+                prev_id = id(current)
+                current = self._get_obj(next_id)
+
+            print("Extracted item {} of XOR linked list from position {}".format(current.value, index))
 
     def print_items(self):
-        pass
+        print("Items in the linked list are:")
+        current = self.head
+        prev_id = 0
+        items = [current.value]
+        for _ in range(self.size-1):
+            next_id = prev_id ^ current.both
+            prev_id = id(current)
+            current = self._get_obj(next_id)
+
+            items.append(current.value)
+
+        print(items)
+
+    # (Code adapted from Daily Coding Problem)
+    def _get_obj(self, id):
+        return ctypes.cast(id, ctypes.py_object).value
+
 
     def __len__(self):
         return self.size
