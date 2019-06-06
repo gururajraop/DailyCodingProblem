@@ -11,24 +11,31 @@ import numpy as np
 
 
 def decode_count(message):
-    if message.startswith('0'):
-        return 0
-
     if len(message) <= 1:
-        return 1
+        return 1        # Even empty string can be decoded as empty message.
 
-    count = 0
-    if int(message[:2]) < 27:
-        count += decode_count(message[2:])
+    count = np.zeros(len(message))
+    for i in reversed(range(len(message))):
+        if message[i].startswith('0'):
+            count[i] = 0
+        elif i == len(message) - 1:
+            count[i] = 1
+        elif i == len(message) - 2:
+            if int(message[i] + message[i + 1]) <= 26:
+                count[i] = 1 + count[i + 1]
+            else:
+                count[i] = 1
+        else:
+            if int(message[i] + message[i + 1]) <= 26:
+                count[i] = count[i + 2]
+            count[i] += count[i + 1]
 
-    count += decode_count(message[1:])
+    return count[0]
 
-    return count
 
 if __name__ == '__main__':
     assert decode_count('111') == 3, "Fail: Test 1 of input message 111"
-
-
     assert decode_count('621182118110') == 25, "Fail: Test 1 of input message 621182118110"
+
     message = input("Please enter the coded message: ")
     print("Number of ways to decode the given message is: ", decode_count(message))
