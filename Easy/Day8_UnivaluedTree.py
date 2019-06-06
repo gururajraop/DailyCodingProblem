@@ -80,10 +80,17 @@ def count_univalued_subtree(root):
 
 if __name__ == '__main__':
     Tree = Node(0, Node(1), Node(0, Node(1, Node(1), Node(1)), Node(0)))
-    #Tree = Node(1, Node(1, Node(1), Node(1)), Node(1, Node(1), Node(1)))
     str = "Space:" + '' * 0 + ":"
     print("Given input tree is:")
     print_tree(Tree)
-    print("\n\n")
+    print("")
     result = count_univalued_subtree(Tree)
-    print("\n\nNumber of univalued subtrees: ", result)
+    print("Number of univalued subtrees: ", result)
+
+    Tree = Node(1, Node(1, Node(1), Node(1)), Node(1, Node(1), Node(1)))
+    str = "Space:" + '' * 0 + ":"
+    print("\n\nGiven input tree is:")
+    print_tree(Tree)
+    print("")
+    result = count_univalued_subtree(Tree)
+    print("Number of univalued subtrees: ", result)
