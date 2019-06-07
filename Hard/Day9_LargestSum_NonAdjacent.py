@@ -13,7 +13,19 @@ import numpy as np
 
 
 def simple_logic(arr):
-    return 0
+    if len(arr) == 0:
+        return 0
+
+    if len(arr) == 1:
+        return arr[0]
+
+    if len(arr) == 2:
+        return max(arr[0], arr[1])
+
+    sum1 = arr[0] + simple_logic(arr[2:])
+    sum2 = arr[1] + simple_logic(arr[3:])
+
+    return max(sum1, sum2)
 
 
 def one_pass(arr):
