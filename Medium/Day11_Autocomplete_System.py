@@ -16,17 +16,21 @@ from collections import defaultdict
 
 class Vocabulary:
     def __init__(self):
-        self.vocab = defaultdict([])
+        self.vocab = defaultdict(lambda: defaultdict(list))
 
-    def __add_item(self, str_set):
+    def add_item(self, str_set):
         for item in str_set:
-            self.vocab[item[0]].append(str_set)
+            self.vocab[item[0]][item[1]].append(item)
+
+    def get_items(self, search_term):
+        return self.vocab[search_term[0]][search_term[1]]
 
 
 if __name__ == '__main__':
     print("Autocomplete System")
-    vocab = Vocabulary()
-    print(vocab.vocab)
+    Vocab = Vocabulary()
     input_strings = ['dog', 'deer', 'deal']
-    vocab.__add_item(input_strings)
-    print(vocab.vocab)
+    Vocab.add_item(input_strings)
+    search_term = "de"
+    print("Result of autocomplete system: {}".format(Vocab.get_items(search_term)))
+    
