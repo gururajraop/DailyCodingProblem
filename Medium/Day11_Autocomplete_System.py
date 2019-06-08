@@ -11,6 +11,22 @@ import os
 import sys
 import numpy as np
 
+from collections import defaultdict
+
+
+class Vocabulary:
+    def __init__(self):
+        self.vocab = defaultdict([])
+
+    def __add_item(self, str_set):
+        for item in str_set:
+            self.vocab[item[0]].append(str_set)
+
 
 if __name__ == '__main__':
     print("Autocomplete System")
+    vocab = Vocabulary()
+    print(vocab.vocab)
+    input_strings = ['dog', 'deer', 'deal']
+    vocab.__add_item(input_strings)
+    print(vocab.vocab)
