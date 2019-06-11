@@ -19,7 +19,9 @@ import numpy as np
 
 
 def get_unique_ways(n, steps):
-    pass
+    assert (n > 1) and (steps > 0).all() and (steps <= n).all(), "Invalid input"
+
+    return [1,2]
 
 
 if __name__ == '__main__':
