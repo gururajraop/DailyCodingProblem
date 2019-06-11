@@ -26,34 +26,48 @@ def get_unique_ways1(n):
     elif n == 2:
         return [[1, 1], [2]]
     else:
-        a, b = [[1]], [[1, 1], [2]]
-        for _ in range(n-2):
-            a = [l + [2] for l in a]
-            b = [l + [1] for l in b]
-            a, b = b, a + b
+        a = [l + [2] for l in get_unique_ways1(n-2)]
+        b = [l + [1] for l in get_unique_ways1(n-1)]
 
-        return b
+        return a + b
 
 
 def get_unique_ways2(n, steps):
     steps = np.array(steps)
     assert (n > 0) and (steps > 0).all(), "Invalid input! non-positive input"
+    assert len(steps) > 0, "Not all jumps can be bigger than the total number of steps"
 
-    if (steps > n).all():
-        print("Steps to climb shouldn't be bigger than total number of steps")
-        return []
+    cache = np.zeros(n + 1)
+    cache[0] = 1
+    for i in range(1, n+1):
+        cache[i] += sum(cache[i - s] for s in steps if i - s >= 0)
+        print(cache)
 
-    return []
+    return cache[n]
 
 
 if __name__ == '__main__':
+    # With steps = {1, 2}
+    print(get_unique_ways1(1))
+    print(get_unique_ways1(2))
+    print(get_unique_ways1(3))
+    print(get_unique_ways1(4))
+    print(get_unique_ways1(5))
     assert len(get_unique_ways1(1)) == 1, 'Fail: Test 1 failed'
     assert len(get_unique_ways1(2)) == 2, 'Fail: Test 2 failed'
     assert len(get_unique_ways1(3)) == 3, 'Fail: Test 3 failed'
     assert len(get_unique_ways1(4)) == 5, 'Fail: Test 4 failed'
     assert len(get_unique_ways1(5)) == 8, 'Fail: Test 5 failed'
-    #assert len(get_unique_ways2(5, [1, 2])) == 8, 'Fail: Test 6 failed'
-    #assert len(get_unique_ways2(5, [1, 3])) == 4, 'Fail: Test 7 failed'
+
+    n = int(input("Enter the number of steps\n"))
+    result = get_unique_ways1(n)
+    print("Number of ways to climb {} steps being able to climb [1,2] steps at a time is: {}".format(n, len(result)))
+    print(result)
+    assert False
+
+    # With steps = {ANYTHING}
+    assert get_unique_ways2(5, [1, 2]) == 8, 'Fail: Test 6 failed'
+    assert get_unique_ways2(5, [1, 3]) == 4, 'Fail: Test 7 failed'
 
     n = int(input("Enter the number of steps\n"))
     steps_in = input("Enter a list of steps that can be climbed, separated by space\n").split()
@@ -61,5 +75,4 @@ if __name__ == '__main__':
     steps = np.array([s for s in steps if s <= n])
 
     result = get_unique_ways2(n, steps)
-    print("Number of ways to climb {} steps being able to climb {} steps at a time is: {}".format(n, steps_in, len(result)))
-    print("The unique ways are: ", result)
+    print("Number of ways to climb {} steps being able to climb {} steps at a time is: {}".format(n, steps_in, result))
