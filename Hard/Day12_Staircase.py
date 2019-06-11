@@ -44,7 +44,6 @@ def get_unique_ways2(n, steps):
     cache[0] = 1
     for i in range(1, n+1):
         cache[i] += sum(cache[i - s] for s in steps if i - s >= 0)
-        print(cache)
 
     return cache[n]
 
@@ -59,9 +58,8 @@ if __name__ == '__main__':
 
     n = int(input("Enter the number of steps\n"))
     result = get_unique_ways1(n)
-    print("Number of ways to climb {} steps being able to climb [1,2] steps at a time is: {}".format(n, len(result)))
-    print(result)
-    assert False
+    print("Number of ways to climb {} steps, being able to climb [1,2] steps at a time, is: {}".format(n, len(result)))
+    print("Unique ways: ", result)
 
     # With steps = {ANYTHING}
     assert get_unique_ways2(5, [1, 2]) == 8, 'Fail: Test 6 failed'
@@ -73,4 +71,4 @@ if __name__ == '__main__':
     steps = np.array([s for s in steps if s <= n])
 
     result = get_unique_ways2(n, steps)
-    print("Number of ways to climb {} steps being able to climb {} steps at a time is: {}".format(n, steps_in, result))
+    print("Number of ways to climb {} steps, being able to climb {} steps at a time, is: {}".format(n, steps_in, result))
