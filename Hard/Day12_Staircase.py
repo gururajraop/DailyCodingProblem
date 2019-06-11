@@ -64,14 +64,14 @@ if __name__ == '__main__':
     assert len(get_unique_ways1(4)) == 5, 'Fail: Test 4 failed'
     assert len(get_unique_ways1(5)) == 8, 'Fail: Test 5 failed'
 
-    #n = int(input("Enter the number of steps\n"))
-    #result = get_unique_ways1(n)
-    #print("Number of ways to climb {} steps, being able to climb [1,2] steps at a time, is: {}".format(n, len(result)))
-    #print("Unique ways: ", result)
+    n = int(input("Enter the number of steps\n"))
+    result = get_unique_ways1(n)
+    print("Number of ways to climb {} steps, being able to climb [1,2] steps at a time, is: {}".format(n, len(result)))
+    print("Unique ways: ", result)
 
     # With steps = {ANYTHING}
-    #assert get_unique_ways2(5, [1, 2]) == 8, 'Fail: Test 6 failed'
-    #assert get_unique_ways2(5, [1, 3]) == 4, 'Fail: Test 7 failed'
+    assert len(get_unique_ways2(5, [1, 2])) == 8, 'Fail: Test 6 failed'
+    assert len(get_unique_ways2(5, [1, 3])) == 4, 'Fail: Test 7 failed'
     assert len(get_unique_ways2(7, [2, 3, 4])) == 5, 'Fail: Test 7 failed'
 
     n = int(input("Enter the number of steps\n"))
@@ -80,4 +80,5 @@ if __name__ == '__main__':
     steps = np.array([s for s in steps if s <= n])
 
     result = get_unique_ways2(n, steps)
-    print("Number of ways to climb {} steps, being able to climb {} steps at a time, is: {}".format(n, steps_in, result))
+    print("Number of ways to climb {} steps, being able to climb {} steps at a time, is: {}".format(n, steps_in, len(result)))
+    print("Unique ways: ", result)
