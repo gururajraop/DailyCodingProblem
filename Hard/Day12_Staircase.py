@@ -40,10 +40,18 @@ def get_unique_ways2(n, steps):
     assert (n > 0) and (steps > 0).all(), "Invalid input! non-positive input"
     assert len(steps) > 0, "Not all jumps can be bigger than the total number of steps"
 
-    cache = np.zeros(n + 1)
-    cache[0] = 1
-    for i in range(1, n+1):
-        cache[i] += sum(cache[i - s] for s in steps if i - s >= 0)
+    cache = [[] for _ in range(n+1)]
+    for i in range(n+1):
+        if i < steps[0]:
+            continue
+        for s in steps:
+            if i == s:
+                cache[i].append([s])
+            elif i > s:
+                item = [l + [s] for l in cache[i-s]]
+                cache[i] = cache[i] + item
+            else:
+                break
 
     return cache[n]
 
@@ -56,14 +64,15 @@ if __name__ == '__main__':
     assert len(get_unique_ways1(4)) == 5, 'Fail: Test 4 failed'
     assert len(get_unique_ways1(5)) == 8, 'Fail: Test 5 failed'
 
-    n = int(input("Enter the number of steps\n"))
-    result = get_unique_ways1(n)
-    print("Number of ways to climb {} steps, being able to climb [1,2] steps at a time, is: {}".format(n, len(result)))
-    print("Unique ways: ", result)
+    #n = int(input("Enter the number of steps\n"))
+    #result = get_unique_ways1(n)
+    #print("Number of ways to climb {} steps, being able to climb [1,2] steps at a time, is: {}".format(n, len(result)))
+    #print("Unique ways: ", result)
 
     # With steps = {ANYTHING}
-    assert get_unique_ways2(5, [1, 2]) == 8, 'Fail: Test 6 failed'
-    assert get_unique_ways2(5, [1, 3]) == 4, 'Fail: Test 7 failed'
+    #assert get_unique_ways2(5, [1, 2]) == 8, 'Fail: Test 6 failed'
+    #assert get_unique_ways2(5, [1, 3]) == 4, 'Fail: Test 7 failed'
+    assert len(get_unique_ways2(7, [2, 3, 4])) == 5, 'Fail: Test 7 failed'
 
     n = int(input("Enter the number of steps\n"))
     steps_in = input("Enter a list of steps that can be climbed, separated by space\n").split()
