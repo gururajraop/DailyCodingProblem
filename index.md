@@ -16,6 +16,7 @@
 * [Day 4: First missing positive integer](./Hard/Day4_Array_MissingNumber.py)
 * [Day 6: XOR Linked List](./Hard/Day6_XOR_LinkedList.py)
 * [Day 9: Largest sum of Non-adjacent items](./Hard/Day9_LargestSum_NonAdjacent.py)
+* [Day 12: Staircase](./Hard/Day12_Staircase.py)
 
 ## Lessons
 * [Lesson 1: Sorted merged list of lists](./Lessons/1_Sorted_merged_list_of_lists.py)
