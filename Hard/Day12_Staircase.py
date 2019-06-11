@@ -26,10 +26,13 @@ def get_unique_ways1(n):
     elif n == 2:
         return [[1, 1], [2]]
     else:
-        a = [l + [2] for l in get_unique_ways1(n-2)]
-        b = [l + [1] for l in get_unique_ways1(n-1)]
+        a, b = [[1]], [[1, 1], [2]]
+        for _ in range(n-2):
+            new_a = [l + [2] for l in a]
+            new_b = [l + [1] for l in b]
+            a, b = b, new_a + new_b
 
-        return a + b
+        return b
 
 
 def get_unique_ways2(n, steps):
@@ -48,11 +51,6 @@ def get_unique_ways2(n, steps):
 
 if __name__ == '__main__':
     # With steps = {1, 2}
-    print(get_unique_ways1(1))
-    print(get_unique_ways1(2))
-    print(get_unique_ways1(3))
-    print(get_unique_ways1(4))
-    print(get_unique_ways1(5))
     assert len(get_unique_ways1(1)) == 1, 'Fail: Test 1 failed'
     assert len(get_unique_ways1(2)) == 2, 'Fail: Test 2 failed'
     assert len(get_unique_ways1(3)) == 3, 'Fail: Test 3 failed'
