@@ -10,6 +10,7 @@
 * [Day 7: Decode encrypted message](./Medium/Day7_MessageDecoding.py)
 * [Day 10: Job Scheduler](./Medium/Day10_FunctionCall_Timer.py)
 * [Day 11: Auto-complete System](./Medium/Day11_Autocomplete_System.py)
+* [Day 14: Compute Pi using Monte-Carlo method](./Medium/Day14_ComputePi.py)
 
 ## Hard Problems
 * [Day 2: Array Product except index](./Hard/Day2_ArrayProd_index.py)
