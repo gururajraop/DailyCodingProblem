@@ -18,6 +18,18 @@ class E_Commerce_log:
         self.log = []
         self.pos = 0
 
+    def add_item(self, item):
+        pass
+
+    def get_item(self, index):
+        pass
+
+    def print_items(self):
+        pass
+
+    def __len__(self):
+        return len(self.log)
+
 
 def print_options():
     print("---------------------E-Comerce Log options---------------------")
@@ -38,6 +50,10 @@ def switch(obj, options):
         4: print_options
     }
     return switcher.get(options, err_message())
+
+
+def err_message():
+    print("Invalid option entered")
 
 
 if __name__ == '__main__':
