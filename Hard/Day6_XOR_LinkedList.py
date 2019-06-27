@@ -112,7 +112,7 @@ def switch(obj, options):
         4: obj.print_items,
         5: print_options
     }
-    return switcher.get(options, err_message())
+    return switcher.get(options, err_message)
 
 if __name__ == '__main__':
     print_options()

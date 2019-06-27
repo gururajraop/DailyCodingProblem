@@ -30,7 +30,8 @@ class E_Commerce_log:
 
     def get_item(self):
         index = int(input("====> Please enter the index of the item to be retrieved: "))
-        print("====> Retrieved item is: ", self.log[index-1])
+        index = self.pos - index
+        print("====> Retrieved item is: ", self.log[index])
 
     def print_items(self):
         print("Items in the log entry are:")
@@ -58,7 +59,7 @@ def switch(obj, options):
         3: obj.print_items,
         4: print_options
     }
-    return switcher.get(options)
+    return switcher.get(options, err_message)
 
 
 def err_message():
