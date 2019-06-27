@@ -10,6 +10,7 @@ You should be as efficient with time and space as possible.
 import os
 import sys
 import numpy as np
+import random
 
 
 class E_Commerce_log:
@@ -18,14 +19,22 @@ class E_Commerce_log:
         self.log = []
         self.pos = 0
 
-    def add_item(self, item):
-        pass
+    def add_item(self):
+        order_id = random.randint(0, 10000)
+        if len(self.log) < self.max_size:
+            self.log.append(order_id)
+        else:
+            self.log[self.pos] = order_id
 
-    def get_item(self, index):
-        pass
+        self.pos = (self.pos + 1) % self.max_size
+
+    def get_item(self):
+        index = int(input("====> Please enter the index of the item to be retrieved: "))
+        print("====> Retrieved item is: ", self.log[index-1])
 
     def print_items(self):
-        pass
+        print("Items in the log entry are:")
+        print(self.log)
 
     def __len__(self):
         return len(self.log)
@@ -49,7 +58,7 @@ def switch(obj, options):
         3: obj.print_items,
         4: print_options
     }
-    return switcher.get(options, err_message())
+    return switcher.get(options)
 
 
 def err_message():
