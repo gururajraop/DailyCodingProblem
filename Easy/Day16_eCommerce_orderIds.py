@@ -19,6 +19,39 @@ class E_Commerce_log:
         self.pos = 0
 
 
+def print_options():
+    print("---------------------E-Comerce Log options---------------------")
+    print("\t1:\tInsert an item to the log")
+    print("\t2:\tGet last ith element from the log")
+    print("\t3:\tPrint the entries of the log")
+    print("\t4:\tPrint the options menu")
+    print("\t0:\tExit")
+    print("------------------------------End------------------------------")
+
+
+def switch(obj, options):
+    switcher = {
+        0: -1,
+        1: obj.add_item,
+        2: obj.get_item,
+        3: obj.print_items,
+        4: print_options
+    }
+    return switcher.get(options, err_message())
+
+
 if __name__ == '__main__':
     max_size = int(input("Please enter the maximum size of the log: "))
     eLog = E_Commerce_log(max_size)
+
+    option = 1
+    print_options()
+    while option != 0:
+        option = int(input("----->Please enter your option: "))
+        func = switch(eLog, option)
+        if func == -1:
+            break
+        else:
+            func()
+
+    print("\nDone")
