@@ -11,6 +11,7 @@
 * [Day 10: Job Scheduler](./Medium/Day10_FunctionCall_Timer.py)
 * [Day 11: Auto-complete System](./Medium/Day11_Autocomplete_System.py)
 * [Day 14: Compute Pi using Monte-Carlo method](./Medium/Day14_ComputePi.py)
+* [Day 15: Reservoir Sampling](./Medium/Day15_reservoirSampling.py)
 
 ## Hard Problems
 * [Day 2: Array Product except index](./Hard/Day2_ArrayProd_index.py)
