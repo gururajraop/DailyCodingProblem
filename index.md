@@ -3,6 +3,7 @@
 ## Easy Problems
 * [Day 1: Sum Pair In Array](./Easy/Day1_sumPair.py)
 * [Day 8: Count Uni-Valued sub tree](./Easy/Day8_UnivaluedTree.py)
+* [Day 16: e-Commerce Order Ids](./Easy/Day16_eCommerce_orderIds.py)
 
 ## Medium Problems
 * [Day 3: Tree (De)Serialization](./Medium/Day3_Tree_De_Serialize.py)
