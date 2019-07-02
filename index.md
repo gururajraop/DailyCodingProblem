@@ -22,6 +22,7 @@
 * [Day 12: Staircase](./Hard/Day12_Staircase.py)
 * [Day 13: Substring with K distinct letters](./Hard/Day13_Substring_Kletters.py)
 * [Day 17: File System](./Hard/Day17_File_System.py)
+* [Day 18: Max item of sub array](./Hard/Day18_Max_of_SubArray.py)
 
 ## Lessons
 * [Lesson 1: Sorted merged list of lists](./Lessons/1_Sorted_merged_list_of_lists.py)
