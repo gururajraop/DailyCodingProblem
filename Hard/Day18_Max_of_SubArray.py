@@ -20,19 +20,26 @@ import numpy as np
 def max_subarray(arr, k):
     assert (0 < k) and (k <= len(arr)), "Invalid value of k"
 
-    max_item = -np.inf
-    max_index = 0
+    max_idx = 0
+    next_max_idx = 0
     indices = []
     for i, element in enumerate(arr):
         if i < k:
-            if max_item < element:
-                max_item = element
-                max_index += 1
+            if arr[max_idx] < element:
+                max_idx = i
+            if (element > arr[next_max_idx]) and (element < arr[max_idx]):
+                next_max_idx = i
             indices.append(i)
             if i == k-1:
-                print("Max(", arr[i-k+1:i+1], ") = ", max_item)
+                print("Max(", arr[i-k+1:i+1], ") = ", arr[max_idx])
         else:
-            print("Max(", arr[i-k+1:i+1], ") = ", max_item)
+            if max_idx == i-k:
+                max_idx = i if element > arr[next_max_idx] else i
+            else:
+                max_idx = i if element > arr[max_idx] else max_idx
+                next_max_idx = i if (element > arr[next_max_idx]) and (element < arr[max_idx]) else next_max_idx
+
+            print("Max(", arr[i-k+1:i+1], ") = ", arr[max_idx])
 
 
 
