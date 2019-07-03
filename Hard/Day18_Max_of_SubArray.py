@@ -20,21 +20,41 @@ import numpy as np
 def max_subarray(arr, k):
     assert (0 < k) and (k <= len(arr)), "Invalid value of k"
 
-    max_idx = 0
-    next_max_idx = 0
-    indices = []
+    if len(arr) == 1:
+        print("Max(", arr, ") = ", arr[0])
+        return
+
+    if len(arr) == 2:
+        if k == 1:
+            print("Max(", arr[0], ") = ", arr[0])
+            print("Max(", arr[1], ") = ", arr[1])
+        else:
+            print("Max(", arr, ") = ", max(arr))
+        return
+
+    max_idx = -1
+    next_max_idx = -1
+
     for i, element in enumerate(arr):
-        if i < k:
+        if i == 0:
+            max_idx = i
+        elif i == 1:
+            max_idx = i if element > arr[max_idx] else max_idx
+            next_max_idx = 1 if element < arr[max_idx] else 0
+        elif i < k:
             if arr[max_idx] < element:
                 max_idx = i
-            if (element > arr[next_max_idx]) and (element < arr[max_idx]):
+            elif (element > arr[next_max_idx]) and (element < arr[max_idx]):
                 next_max_idx = i
-            indices.append(i)
+
             if i == k-1:
                 print("Max(", arr[i-k+1:i+1], ") = ", arr[max_idx])
         else:
             if max_idx == i-k:
-                max_idx = i if element > arr[next_max_idx] else i
+                if element > arr[next_max_idx]:
+                    max_idx = i
+                else:
+                    max_idx = next_max_idx
             else:
                 max_idx = i if element > arr[max_idx] else max_idx
                 next_max_idx = i if (element > arr[next_max_idx]) and (element < arr[max_idx]) else next_max_idx
