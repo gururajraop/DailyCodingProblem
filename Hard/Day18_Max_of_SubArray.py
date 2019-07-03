@@ -15,6 +15,7 @@ You can simply print them out as you compute them.
 import os
 import sys
 import numpy as np
+from collections import deque
 
 
 def max_subarray(arr, k):
@@ -32,37 +33,33 @@ def max_subarray(arr, k):
             print("Max(", arr, ") = ", max(arr))
         return
 
-    max_idx = -1
-    next_max_idx = -1
-
+    double_ended_queue = deque()
     for i, element in enumerate(arr):
-        if i == 0:
-            max_idx = i
-        elif i == 1:
-            max_idx = i if element > arr[max_idx] else max_idx
-            next_max_idx = 1 if element < arr[max_idx] else 0
-        elif i < k:
-            if arr[max_idx] < element:
-                max_idx = i
-            elif (element > arr[next_max_idx]) and (element < arr[max_idx]):
-                next_max_idx = i
-
-            if i == k-1:
-                print("Max(", arr[i-k+1:i+1], ") = ", arr[max_idx])
-        else:
-            if max_idx == i-k:
-                if element > arr[next_max_idx]:
-                    max_idx = i
+        if i < k:
+            while double_ended_queue:
+                if element >= arr[double_ended_queue[-1]]:
+                    double_ended_queue.pop()
                 else:
-                    max_idx = next_max_idx
-            else:
-                max_idx = i if element > arr[max_idx] else max_idx
-                next_max_idx = i if (element > arr[next_max_idx]) and (element < arr[max_idx]) else next_max_idx
+                    break
+            double_ended_queue.append(i)
+            if i == k-1:
+                print("Max(", arr[i-k+1:i+1], ") = ", arr[double_ended_queue[0]])
+        else:
+            while double_ended_queue:
+                if double_ended_queue[0] <= i-k:
+                    double_ended_queue.popleft()
+                else:
+                    break
 
-            print("Max(", arr[i-k+1:i+1], ") = ", arr[max_idx])
+            while double_ended_queue:
+                if element >= arr[double_ended_queue[-1]]:
+                    double_ended_queue.pop()
+                else:
+                    break
 
+            double_ended_queue.append(i)
 
-
+            print("Max(", arr[i-k+1:i+1], ") = ", arr[double_ended_queue[0]])
 
 
 if __name__ == '__main__':
