@@ -21,10 +21,12 @@ from collections import deque
 def max_subarray(arr, k):
     assert (0 < k) and (k <= len(arr)), "Invalid value of k"
 
+    # Just return the single element from the array
     if len(arr) == 1:
         print("Max(", arr, ") = ", arr[0])
         return
 
+    # Return the max of the 2 elements
     if len(arr) == 2:
         if k == 1:
             print("Max(", arr[0], ") = ", arr[0])
@@ -33,30 +35,36 @@ def max_subarray(arr, k):
             print("Max(", arr, ") = ", max(arr))
         return
 
+    # Use double ended queue to sort the max items
     double_ended_queue = deque()
     for i, element in enumerate(arr):
+        # Untill the queue fills in just append the items
         if i < k:
             while double_ended_queue:
+                # If the current item bigger than previous,
+                # remove all the previous items
                 if element >= arr[double_ended_queue[-1]]:
                     double_ended_queue.pop()
                 else:
                     break
+            # Add the current index
             double_ended_queue.append(i)
             if i == k-1:
                 print("Max(", arr[i-k+1:i+1], ") = ", arr[double_ended_queue[0]])
         else:
-            while double_ended_queue:
-                if double_ended_queue[0] <= i-k:
-                    double_ended_queue.popleft()
-                else:
-                    break
+            # Remove the item from the front if that is the max
+            if double_ended_queue[0] <= i-k:
+                double_ended_queue.popleft()
 
+            # If the current item is bigger than previous
+            # remove all such items from the queue
             while double_ended_queue:
                 if element >= arr[double_ended_queue[-1]]:
                     double_ended_queue.pop()
                 else:
                     break
 
+            # Append the current index
             double_ended_queue.append(i)
 
             print("Max(", arr[i-k+1:i+1], ") = ", arr[double_ended_queue[0]])
