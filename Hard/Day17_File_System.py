@@ -33,6 +33,14 @@ import sys
 import numpy as np
 
 
+def find_longest_path(str):
+    return 0
+
 
 if __name__ == '__main__':
-    print("File System")
+    str = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
+    assert find_longest_path(str) == 20, "Test-1 Failed"
+    str = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"
+    assert find_longest_path(str) == 32, "Test-2 Failed"
+
+    print("All tests Pass. :)")

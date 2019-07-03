@@ -38,7 +38,7 @@ def max_subarray(arr, k):
     # Use double ended queue to sort the max items
     double_ended_queue = deque()
     for i, element in enumerate(arr):
-        # Untill the queue fills in just append the items
+        # Untill the queue fills in, just append the items
         if i < k:
             while double_ended_queue:
                 # If the current item bigger than previous,
