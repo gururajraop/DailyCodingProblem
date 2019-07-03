@@ -33,7 +33,34 @@ import sys
 import numpy as np
 
 
+class Dir_System:
+    def __init__(self, name='', parent=None):
+        self.name = name
+        self.parent = parent
+        self.content = {}
+
+
 def find_longest_path(str):
+    name = ""
+    for i, character in enumerate(str):
+        if character == "\n":
+            break
+        name = name + character
+    str = str[i+1:]
+
+    File_sys = Dir_System(name=name, parent=None)
+    current_dir = File_sys
+
+    name = ""
+    for character in str:
+        if character == "\n":
+            if '.' in name:
+                file = current_dir.content.append(file)
+            else:
+                file = Dir_System(name, parent=File_sys)
+            name = ""
+        name = name + character
+
     return 0
 
 
