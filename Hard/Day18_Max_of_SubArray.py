@@ -47,10 +47,25 @@ def max_subarray(arr, k):
 
 if __name__ == '__main__':
     # Given test case
+    print("------------------------Given case------------------------")
     arr = [10, 5, 2, 7, 8, 7]
+    print("Input array is: ", arr, " with k: ", 3)
     max_subarray(arr, k=3)
 
+    # Increasing test case
+    print("\n------------------------Increasing case------------------------")
+    arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print("Input array is: ", arr, " with k: ", 4)
+    max_subarray(arr, k=4)
+
+    # Increasing test case
+    print("\n------------------------Decreasing case------------------------")
+    arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    print("Input array is: ", arr, " with k: ", 4)
+    max_subarray(arr, k=4)
+
     # Random case
-    #arr = np.random.randint(low=0, high=10, size=10)
-    #print("Input array is: ", arr)
-    #max_subarray(arr, k=3)
+    print("\n------------------------Random case------------------------")
+    arr = np.random.randint(low=0, high=10, size=10)
+    print("Input array is: ", arr, " with k: ", 3)
+    max_subarray(arr, k=3)
