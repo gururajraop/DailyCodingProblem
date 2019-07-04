@@ -11,5 +11,14 @@ import sys
 import numpy as np
 
 
+def find_min_cost(cost_matrix):
+    return 0
+
+
 if __name__ == '__main__':
-    print("Paint the house")
+    N = np.random.randint(low=5, high=10, size=1)[0]
+    K = np.random.randint(low=2, high=N, size=1)[0]
+    cost_matrix = np.random.randint(low=30, high=100, size=(N, K))
+
+    min_cost = find_min_cost(cost_matrix)
+    print("Total cost of coloring {} houses with {} colors is {}".format(N, K, min_cost))
