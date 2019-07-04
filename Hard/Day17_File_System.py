@@ -37,7 +37,15 @@ class Dir_System:
     def __init__(self, name='', parent=None):
         self.name = name
         self.parent = parent
-        self.content = {}
+        self.subdirs = []
+        self.files = []
+
+    def add_subdir(self, name):
+        subdir = Dir_System(name=name, parent=self)
+        self.subdirs.append(subdir)
+
+    def add_file(self, name):
+        self.files.append(name)
 
 
 def find_longest_path(str):
@@ -49,17 +57,33 @@ def find_longest_path(str):
     str = str[i+1:]
 
     File_sys = Dir_System(name=name, parent=None)
-    current_dir = File_sys
 
     name = ""
+    depth = 0
     for character in str:
         if character == "\n":
+            current_dir = File_sys
+            for _ in range(depth - 1):
+                current_dir = current_dir.subdirs[-1]
             if '.' in name:
-                file = current_dir.content.append(file)
+                current_dir.add_file(name=name)
             else:
-                file = Dir_System(name, parent=File_sys)
+                current_dir.add_subdir(name=name)
             name = ""
-        name = name + character
+            depth = 0
+        elif character == "\t":
+            depth += 1
+        else:
+            name = name + character
+
+    if name != "":
+        current_dir = File_sys
+        for _ in range(depth - 1):
+            current_dir = current_dir.subdirs[-1]
+        if '.' in name:
+            current_dir.add_file(name)
+        else:
+            current_dir.add_subdir(name)
 
     return 0
 
@@ -67,6 +91,7 @@ def find_longest_path(str):
 if __name__ == '__main__':
     str = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
     assert find_longest_path(str) == 20, "Test-1 Failed"
+
     str = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"
     assert find_longest_path(str) == 32, "Test-2 Failed"
 
