@@ -68,12 +68,9 @@ def find_intersection(list1, list2):
     set1 = list1.get_set()
     set2 = list2.get_set()
 
-    for x in set1:
-        for y in set2:
-            if x == y:
-                return x
+    result = list(set1 & set2)
 
-    return -1
+    return result if len(result) > 0 else -1
 
 
 if __name__ == '__main__':
