@@ -13,16 +13,16 @@ import numpy as np
 
 def find_min_cost(cost_matrix):
     N, K = cost_matrix.shape
-    solution = list(np.zeros((1, K)))
+    solution = [0] * K
 
     for h, house in enumerate(cost_matrix):
         house_cost = []
         for c, cost in enumerate(house):
-            min_cost = min([solution[h][i] for i in range(K) if i != c])
+            min_cost = min([solution[i] for i in range(K) if i != c])
             house_cost.append(min_cost + cost)
-        solution.append(house_cost)
+        solution = house_cost
 
-    min_cost = min(solution[-1])
+    min_cost = min(solution)
 
     return min_cost
 
