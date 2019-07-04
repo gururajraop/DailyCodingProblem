@@ -48,7 +48,7 @@ class Dir_System:
         self.files.append(name)
 
 
-def find_longest_path(str):
+def create_file_system(str):
     name = ""
     for i, character in enumerate(str):
         if character == "\n":
@@ -85,7 +85,39 @@ def find_longest_path(str):
         else:
             current_dir.add_subdir(name)
 
-    return 0
+    return File_sys
+
+
+def paths_to_files(File_system):
+    if len(File_system.subdirs) == 0 and len(File_system.files) == 0:
+        return ''
+
+    if len(File_system.subdirs) == 0:
+        paths = [File_system.name + '/' + filename for filename in File_system.files]
+        return paths
+
+    if len(File_system.files) == 0:
+        paths = []
+        for dir in File_system.subdirs:
+            paths = paths + [File_system.name + '/' + path for path in paths_to_files(dir)]
+
+        return paths
+
+    paths = [File_system.name + '/' + filename for filename in File_system.files]
+    for dir in File_system.subdirs:
+        paths = paths + [File_system.name + '/' + path for path in paths_to_files(dir)]
+
+    return paths
+
+
+def find_longest_path(str):
+    File_system = create_file_system(str)
+    paths = paths_to_files(File_system)
+    #print(paths)
+    lengths = [len(p) for p in paths]
+
+    return max(lengths)
+
 
 
 if __name__ == '__main__':
