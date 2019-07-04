@@ -43,6 +43,15 @@ class Linked_List:
 
         print(items)
 
+    def get_set(self):
+        item_set = set()
+        current = self.head
+        while current is not None:
+            item_set.add(current.value)
+            current = current.next
+
+        return item_set
+
     def __len__(self):
         return self.size
 
@@ -56,6 +65,14 @@ def create_linked_list(lst):
 
 
 def find_intersection(list1, list2):
+    set1 = list1.get_set()
+    set2 = list2.get_set()
+
+    for x in set1:
+        for y in set2:
+            if x == y:
+                return x
+
     return -1
 
 
@@ -69,11 +86,11 @@ if __name__ == '__main__':
     N = np.random.randint(low=5, high=15, size=1)[0]
     list2 = np.random.randint(low=1, high=50, size=N)
     list2 = create_linked_list(list2)
-    print("Items in the list-2 are: ")
+    print("\nItems in the list-2 are: ")
     list2.print_list()
 
     intersection = find_intersection(list1, list2)
     if intersection == -1:
         print("\nThe lists do not intersect")
     else:
-        print("\n The lists intersect at node: ", intersection)
+        print("\nThe lists intersect at node: ", intersection)
