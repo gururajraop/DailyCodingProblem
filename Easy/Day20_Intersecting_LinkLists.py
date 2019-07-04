@@ -60,13 +60,13 @@ def find_intersection(list1, list2):
 
 
 if __name__ == '__main__':
-    M = np.random.randint(low=5, high=10, size=1)[0]
+    M = np.random.randint(low=5, high=15, size=1)[0]
     list1 = np.random.randint(low=1, high=50, size=M)
     list1 = create_linked_list(list1)
     print("Items in the list-1 are: ")
     list1.print_list()
 
-    N = np.random.randint(low=5, high=10, size=1)[0]
+    N = np.random.randint(low=5, high=15, size=1)[0]
     list2 = np.random.randint(low=1, high=50, size=N)
     list2 = create_linked_list(list2)
     print("Items in the list-2 are: ")
